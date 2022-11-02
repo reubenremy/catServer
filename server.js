@@ -7,7 +7,7 @@ app.use(cors())
 app.use(express.urlencoded({ extended: true }))
 
 app.use("/", (req, res) => {
-    res.send('Hello World')
+    res.send('Hello World 2')
 })
 
 const port = 8080 || process.env.PORT
