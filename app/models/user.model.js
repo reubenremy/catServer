@@ -50,7 +50,7 @@ class User {
                 resolve({
                     status: 1,
                     user: res[0],
-                    message:"Account retreived :)" 
+                    message:`Welcome back ${username}` 
                 })
             })
         })
