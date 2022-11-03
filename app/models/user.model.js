@@ -25,19 +25,33 @@ class User {
 
     async create(){
         try {
-            await db.query('INSERT INTO user_tbl SET ?', this)
+            return await new Promise((resolve, reject) => {
+                db.query('INSERT INTO user_tbl SET ?', this, (err, res) => {
+                    if (err) reject(err)
+                    resolve(res)
+                })
+            })
         } catch (error) {
-            console.log(error)
+            return error
         }
     }
 
-    static async findById(id){
+    static async findByUsername(username){
         return await new Promise((resolve, reject) => {
-            db.query(`SELECT * FROM user_tbl WHERE id=${id};`, (err, res) => {
+            db.query(`SELECT * FROM user_tbl WHERE username="${username}";`, (err, res) => {
                 if (err) reject(err)
-                if (res.length) {
-                    resolve(res[0])
+                if (!res.length) {
+                    resolve({
+                        status: 0,
+                        user: null,
+                        message: "account doesn't exist"
+                    })
                 }
+                resolve({
+                    status: 1,
+                    user: res[0],
+                    message:"Account retreived :)" 
+                })
             })
         })
     }
