@@ -10,7 +10,8 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 app.use("/", (req, res) => {
-    res.send(User.findById(1))
+    res.send("hello")
+    // res.send(User.findById(1))
 })
 
 const port = 8080 || process.env.PORT
